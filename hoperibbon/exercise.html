@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise Guide - VIT Hope Ribbon</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/chat.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.3.1/css/hover-min.css">
+    <style>
+        /* Hero Section */
+        .exercise-hero {
+            height: 60vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                        url('https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?ixlib=rb-4.0.3');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 70px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Exercise Content */
+        .exercise-container {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .exercise-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .exercise-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .exercise-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .exercise-content {
+            padding: 1.5rem;
+        }
+
+        .exercise-title {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .exercise-description {
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .exercise-steps {
+            list-style: none;
+            padding: 0;
+        }
+
+        .exercise-steps li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .exercise-steps li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #ff69b4;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, #ff69b4, #ff8dc7);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255,105,180,0.3);
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255,105,180,0.4);
+        }
+
+        .tips-section {
+            background: linear-gradient(135deg, #fde4f2, #e1d4fa);
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            margin: 4rem 0;
+            text-align: center;
+        }
+
+        .tips-section h2 {
+            color: #333;
+            margin-bottom: 2rem;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: left;
+        }
+
+        .tip-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .tip-card i {
+            color: #ff69b4;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .exercise-container {
+                padding: 0 1rem;
+            }
+
+            .exercise-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff69b4;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ff69b4;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: #333;
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        @media (max-width: 1024px) {
+            .nav-links {
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                width: 100%;
+                text-align: center;
+                padding: 0.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">VIT Hope Ribbon</div>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="hvr-underline-from-center">Home</a></li>
+            <li><a href="about.html" class="hvr-underline-from-center">About</a></li>
+            <li><a href="features.html" class="hvr-underline-from-center">Features</a></li>
+            <li><a href="medical.html" class="hvr-underline-from-center">Medical Help</a></li>
+            <li><a href="community.html" class="hvr-underline-from-center">Community</a></li>
+            <li><a href="DONATION.html" class="hvr-underline-from-center">Donation</a></li>
+            <li><a href="contact.html" class="hvr-underline-from-center">Contact</a></li>
+            <li><a href="login.html" class="hvr-underline-from-center">Login/Register</a></li>
+        </ul>
+    </nav>
+
+    <div class="exercise-hero">
+        <div class="hero-content">
+            <h1 class="animate__animated animate__fadeInDown">Exercise Guide</h1>
+            <p class="animate__animated animate__fadeInUp">Safe and effective exercises for breast cancer patients and survivors</p>
+        </div>
+    </div>
+
+    <div class="exercise-container">
+        <a href="features.html" class="back-button hvr-icon-back">
+            <i class="fas fa-arrow-left hvr-icon"></i> Back to Features
+        </a>
+
+        <div class="exercise-grid">
+            <!-- Gentle Stretching -->
+            <div class="exercise-card" data-aos="fade-up">
+                <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b" 
+                     alt="Gentle Stretching" class="exercise-image">
+                <div class="exercise-content">
+                    <h3 class="exercise-title">Gentle Stretching</h3>
+                    <p class="exercise-description">Start with gentle stretches to improve flexibility and reduce stiffness.</p>
+                    <ul class="exercise-steps">
+                        <li>Shoulder rolls - 10 times each direction</li>
+                        <li>Neck stretches - hold 15 seconds each side</li>
+                        <li>Arm circles - 10 times each direction</li>
+                        <li>Wrist rotations - 10 times each direction</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Walking -->
+            <div class="exercise-card" data-aos="fade-up" data-aos-delay="100">
+                <img src="https://images.unsplash.com/photo-1476480862126-209bfaa8edc8" 
+                     alt="Walking" class="exercise-image">
+                <div class="exercise-content">
+                    <h3 class="exercise-title">Walking Program</h3>
+                    <p class="exercise-description">A progressive walking program to build endurance safely.</p>
+                    <ul class="exercise-steps">
+                        <li>Start with 5-10 minutes daily</li>
+                        <li>Gradually increase to 30 minutes</li>
+                        <li>Maintain comfortable pace</li>
+                        <li>Walk on even surfaces</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Yoga -->
+            <div class="exercise-card" data-aos="fade-up" data-aos-delay="200">
+                <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b" 
+                     alt="Yoga" class="exercise-image">
+                <div class="exercise-content">
+                    <h3 class="exercise-title">Modified Yoga</h3>
+                    <p class="exercise-description">Gentle yoga poses to improve flexibility and reduce stress.</p>
+                    <ul class="exercise-steps">
+                        <li>Cat-Cow Stretch</li>
+                        <li>Child's Pose</li>
+                        <li>Modified Downward Dog</li>
+                        <li>Seated Twists</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="tips-section">
+            <h2>Exercise Safety Tips</h2>
+            <div class="tips-grid">
+                <div class="tip-card" data-aos="fade-up">
+                    <i class="fas fa-heart"></i>
+                    <h3>Listen to Your Body</h3>
+                    <p>Start slowly and stop if you feel pain or discomfort.</p>
+                </div>
+                <div class="tip-card" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fas fa-clock"></i>
+                    <h3>Timing Matters</h3>
+                    <p>Exercise when your energy levels are highest.</p>
+                </div>
+                <div class="tip-card" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fas fa-user-md"></i>
+                    <h3>Consult Your Doctor</h3>
+                    <p>Get medical clearance before starting any exercise program.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 VIT Hope Ribbon. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+    </script>
+    <script src="js/main.js"></script>
+    <script src="js/chat.js"></script>
+</body>
+</html> 

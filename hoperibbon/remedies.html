@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Remedies - VIT Hope Ribbon</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/chat.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.3.1/css/hover-min.css">
+    <style>
+        .hero-section {
+            height: 60vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                        url('https://images.unsplash.com/photo-1512621776951-a57141f2eefd');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 70px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .remedies-container {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, #ff69b4, #ff8dc7);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255,105,180,0.3);
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255,105,180,0.4);
+        }
+
+        .remedies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .remedy-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .remedy-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .remedy-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .remedy-content {
+            padding: 1.5rem;
+        }
+
+        .remedy-title {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .remedy-description {
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .remedy-steps {
+            list-style: none;
+            padding: 0;
+        }
+
+        .remedy-steps li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .remedy-steps li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #ff69b4;
+        }
+
+        .tips-section {
+            background: linear-gradient(135deg, #fde4f2, #e1d4fa);
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        .tips-section h2 {
+            color: #333;
+            margin-bottom: 2rem;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .tip-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            text-align: left;
+        }
+
+        .tip-card i {
+            color: #ff69b4;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .disclaimer {
+            background: #fff3f8;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 4rem;
+            text-align: center;
+            border: 2px solid #ff69b4;
+        }
+
+        .disclaimer h3 {
+            color: #ff69b4;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .remedies-container {
+                padding: 0 1rem;
+            }
+
+            .remedies-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff69b4;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ff69b4;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: #333;
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        @media (max-width: 1024px) {
+            .nav-links {
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                width: 100%;
+                text-align: center;
+                padding: 0.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">VIT Hope Ribbon</div>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="hvr-underline-from-center">Home</a></li>
+            <li><a href="about.html" class="hvr-underline-from-center">About</a></li>
+            <li><a href="features.html" class="hvr-underline-from-center">Features</a></li>
+            <li><a href="medical.html" class="hvr-underline-from-center">Medical Help</a></li>
+            <li><a href="community.html" class="hvr-underline-from-center">Community</a></li>
+            <li><a href="DONATION.html" class="hvr-underline-from-center">Donation</a></li>
+            <li><a href="contact.html" class="hvr-underline-from-center">Contact</a></li>
+            <li><a href="login.html" class="hvr-underline-from-center">Login/Register</a></li>
+        </ul>
+    </nav>
+
+    <div class="hero-section">
+        <div class="hero-content">
+            <h1 class="animate__animated animate__fadeInDown">Natural Home Remedies</h1>
+            <p class="animate__animated animate__fadeInUp">Discover natural ways to support your health and well-being</p>
+        </div>
+    </div>
+
+    <div class="remedies-container">
+        <a href="features.html" class="back-button hvr-icon-back">
+            <i class="fas fa-arrow-left hvr-icon"></i> Back to Features
+        </a>
+
+        <div class="remedies-grid">
+            <!-- Turmeric Remedy -->
+            <div class="remedy-card" data-aos="fade-up">
+                <img src="https://images.unsplash.com/photo-1615485500704-8e990f9900f7" 
+                     alt="Turmeric Remedy" class="remedy-image">
+                <div class="remedy-content">
+                    <h3 class="remedy-title">Turmeric Golden Milk</h3>
+                    <p class="remedy-description">A powerful anti-inflammatory drink that can help reduce inflammation and boost immunity.</p>
+                    <ul class="remedy-steps">
+                        <li>Heat 2 cups of milk of choice</li>
+                        <li>Add 1 tsp turmeric powder</li>
+                        <li>Add pinch of black pepper</li>
+                        <li>Optional: honey to taste</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Ginger Tea -->
+            <div class="remedy-card" data-aos="fade-up" data-aos-delay="100">
+                <img src="https://images.unsplash.com/photo-1594631252845-29fc4cc8cde9" 
+                     alt="Ginger Tea" class="remedy-image">
+                <div class="remedy-content">
+                    <h3 class="remedy-title">Ginger Tea</h3>
+                    <p class="remedy-description">Natural remedy for nausea and digestive discomfort during treatment.</p>
+                    <ul class="remedy-steps">
+                        <li>Slice fresh ginger root</li>
+                        <li>Boil in water for 10 minutes</li>
+                        <li>Strain and add lemon</li>
+                        <li>Add honey if desired</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Chamomile Tea -->
+            <div class="remedy-card" data-aos="fade-up" data-aos-delay="200">
+                <img src="https://images.unsplash.com/photo-1594631252642-5c1a7fb37bdf" 
+                     alt="Chamomile Tea" class="remedy-image">
+                <div class="remedy-content">
+                    <h3 class="remedy-title">Chamomile Tea</h3>
+                    <p class="remedy-description">Helps with sleep and anxiety during treatment.</p>
+                    <ul class="remedy-steps">
+                        <li>Use one tea bag per cup</li>
+                        <li>Steep for 5 minutes</li>
+                        <li>Drink 30 mins before bed</li>
+                        <li>Add honey if desired</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="tips-section">
+            <h2>Important Tips</h2>
+            <div class="tips-grid">
+                <div class="tip-card" data-aos="fade-up">
+                    <i class="fas fa-clock"></i>
+                    <h3>Timing Matters</h3>
+                    <p>Take remedies at consistent times for best results.</p>
+                </div>
+                <div class="tip-card" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fas fa-leaf"></i>
+                    <h3>Quality Ingredients</h3>
+                    <p>Use organic, high-quality ingredients when possible.</p>
+                </div>
+                <div class="tip-card" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fas fa-notes-medical"></i>
+                    <h3>Consult Your Doctor</h3>
+                    <p>Always discuss natural remedies with your healthcare provider.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="disclaimer">
+            <h3><i class="fas fa-exclamation-triangle"></i> Important Notice</h3>
+            <p>These remedies are meant to complement, not replace, medical treatment. Always consult with your healthcare provider before starting any new remedy.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 VIT Hope Ribbon. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+    </script>
+    <script src="js/main.js"></script>
+    <script src="js/chat.js"></script>
+</body>
+</html> 

@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start a Campaign - VIT Hope Ribbon</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/chat.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.3.1/css/hover-min.css">
+    <style>
+        .campaign-hero {
+            height: 60vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            overflow: hidden;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                        url('https://images.unsplash.com/photo-1559027615-cd4628902d4a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin-top: 70px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .campaign-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .campaign-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .campaign-form::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(rgba(255, 255, 255, 0.97), rgba(255, 255, 255, 0.97)),
+                        url('https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .form-section {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 2rem;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .form-section h2 {
+            color: #333;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #ff69b4;
+            font-size: 1.8rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e1e1e1;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #ff69b4;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 105, 180, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .file-upload {
+            border: 2px dashed #ff69b4;
+            padding: 2rem;
+            text-align: center;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .file-upload:hover {
+            border-color: #c77dff;
+            background: #f8f0ff;
+        }
+
+        .file-upload i {
+            font-size: 2.5rem;
+            color: #ff69b4;
+            margin-bottom: 1rem;
+        }
+
+        .preview-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .preview-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .preview-item img,
+        .preview-item video {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .remove-preview {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(255, 105, 180, 0.9);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .remove-preview:hover {
+            background: #ff69b4;
+            transform: scale(1.1);
+        }
+
+        .submit-button {
+            background: linear-gradient(45deg, #ff69b4, #c77dff);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+            box-shadow: 0 4px 10px rgba(255, 105, 180, 0.4);
+        }
+
+        .submit-button:hover {
+            background: linear-gradient(45deg, #c77dff, #ff69b4);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(199, 125, 255, 0.5);
+        }
+
+        .progress-section {
+            background: #f8f0ff;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .progress-bar {
+            height: 20px;
+            background: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(45deg, #ff69b4, #c77dff);
+            width: 0;
+            transition: width 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .campaign-form {
+                padding: 1.5rem;
+            }
+
+            .form-section {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background-color: #f8f0ff;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        .navbar .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ff69b4;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: color 0.3s ease, transform 0.3s ease;
+            display: inline-block;
+        }
+
+        .nav-links li a:hover {
+            color: #ff69b4;
+            transform: translateY(-2px);
+        }
+
+        .nav-links li a.active {
+            color: #ff69b4;
+            font-weight: 700;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            background-color: #333;
+            transition: all 0.3s ease-in-out;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #f8f0ff;
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem 0;
+                gap: 1rem;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">VIT Hope Ribbon</div>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="hvr-underline-from-center">Home</a></li>
+            <li><a href="about.html" class="hvr-underline-from-center">About</a></li>
+            <li><a href="features.html" class="hvr-underline-from-center">Features</a></li>
+            <li><a href="medical.html" class="hvr-underline-from-center">Medical Help</a></li>
+            <li><a href="community.html" class="hvr-underline-from-center">Community</a></li>
+            <li><a href="DONATION.html" class="active hvr-underline-from-center">Donation</a></li>
+            <li><a href="contact.html" class="hvr-underline-from-center">Contact</a></li>
+            <li><a href="login.html" class="hvr-underline-from-center">Login/Register</a></li>
+        </ul>
+    </nav>
+
+    <div class="campaign-hero">
+        <div class="hero-content">
+            <h1 class="animate__animated animate__fadeInDown">Start Your Campaign</h1>
+            <p class="animate__animated animate__fadeInUp animate__delay-1s">Create a fundraising campaign to support breast cancer awareness and research</p>
+        </div>
+    </div>
+
+    <div class="campaign-container">
+        <form class="campaign-form" id="campaignForm" data-aos="fade-up">
+            <!-- Campaign Information -->
+            <div class="form-section" data-aos="fade-up">
+                <h2><i class="fas fa-flag"></i> Campaign Information</h2>
+                <div class="form-group">
+                    <label for="campaignName">Campaign Name</label>
+                    <input type="text" id="campaignName" name="campaignName" required placeholder="Give your campaign a meaningful name">
+                </div>
+                <div class="form-group">
+                    <label for="campaignReason">Campaign Story</label>
+                    <textarea id="campaignReason" name="campaignReason" required placeholder="Share your story and why this campaign matters"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="targetAmount">Target Amount</label>
+                    <input type="number" id="targetAmount" name="targetAmount" min="0" required placeholder="Set your fundraising goal">
+                </div>
+                <div class="form-group">
+                    <label for="campaignDuration">Campaign Duration (in days)</label>
+                    <input type="number" id="campaignDuration" name="campaignDuration" min="1" required placeholder="How long will your campaign run?">
+                </div>
+            </div>
+
+            <!-- Personal Information -->
+            <div class="form-section" data-aos="fade-up" data-aos-delay="100">
+                <h2><i class="fas fa-user"></i> Personal Information</h2>
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" name="fullName" required placeholder="Your full name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required placeholder="Your email address">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="Your contact number">
+                </div>
+            </div>
+
+            <!-- Media Upload -->
+            <div class="form-section" data-aos="fade-up" data-aos-delay="200">
+                <h2><i class="fas fa-images"></i> Campaign Media</h2>
+                <div class="file-upload">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>Drag and drop your images or videos here</p>
+                    <p>or</p>
+                    <input type="file" id="mediaUpload" name="mediaUpload" multiple accept="image/*,video/*" style="display: none;">
+                    <button type="button" class="btn" onclick="document.getElementById('mediaUpload').click()">Browse Files</button>
+                </div>
+                <div class="preview-container" id="previewContainer">
+                    <!-- Preview items will be added here -->
+                </div>
+            </div>
+
+            <button type="submit" class="submit-button hvr-pulse-grow" data-aos="fade-up" data-aos-delay="300">
+                <i class="fas fa-paper-plane"></i> Launch Campaign
+            </button>
+        </form>
+    </div>
+
+    <!-- Live Chat Button -->
+    <button id="chat-toggle" class="chat-toggle hvr-buzz-out">
+        <i class="fas fa-comments"></i>
+    </button>
+
+    <!-- Chat Container -->
+    <div id="chat-container" class="chat-container">
+        <div class="chat-header">
+            <h3>Campaign Support</h3>
+            <button id="close-chat" class="close-chat">&times;</button>
+        </div>
+        <div id="message-display" class="message-display">
+            <!-- Messages will appear here -->
+        </div>
+        <div class="input-area">
+            <textarea id="message-input" placeholder="Ask about creating a campaign..."></textarea>
+            <button id="send-btn" class="send-btn"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 VIT Hope Ribbon. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="js/chat.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+        });
+
+        // Mobile Navigation Toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            const navLinksItems = document.querySelectorAll('.nav-links a');
+
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+
+            // Close menu when clicking a link
+            navLinksItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                });
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                }
+            });
+
+            // File Upload Preview
+            const mediaUpload = document.getElementById('mediaUpload');
+            const previewContainer = document.getElementById('previewContainer');
+
+            mediaUpload.addEventListener('change', function(e) {
+                for (let file of e.target.files) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        const previewItem = document.createElement('div');
+                        previewItem.className = 'preview-item';
+                        
+                        if (file.type.startsWith('image/')) {
+                            previewItem.innerHTML = `
+                                <img src="${event.target.result}" alt="Preview">
+                                <button class="remove-preview">&times;</button>
+                            `;
+                        } else if (file.type.startsWith('video/')) {
+                            previewItem.innerHTML = `
+                                <video src="${event.target.result}" controls></video>
+                                <button class="remove-preview">&times;</button>
+                            `;
+                        }
+                        
+                        previewContainer.appendChild(previewItem);
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Remove preview items
+            previewContainer.addEventListener('click', function(e) {
+                if (e.target.classList.contains('remove-preview')) {
+                    e.target.parentElement.remove();
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

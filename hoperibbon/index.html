@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VIT Hope Ribbon - Breast Cancer Awareness</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/chat.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <!-- Animation Libraries -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.3.1/css/hover-min.css">
+
+  <style>
+    /* Additional styles for proper structure */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      background-color: #f9f9f9; /* Light background */
+    }
+
+    .navbar {
+      background-color: #f8f0ff; /* Changed from #fff to soft lavender */
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #ff69b4;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links li a {
+      text-decoration: none;
+      color: #555;
+      font-weight: 500;
+      transition: color 0.3s ease, transform 0.3s ease;
+      display: inline-block;
+    }
+
+    .nav-links li a:hover {
+      color: #ff69b4;
+      transform: translateY(-2px);
+    }
+
+    .nav-links li a.active {
+      color: #ff69b4;
+      font-weight: 700;
+    }
+
+    .hamburger {
+      display: none; /* Will be shown on smaller screens */
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 25px;
+      height: 3px;
+      margin: 5px auto;
+      background-color: #333;
+      transition: all 0.3s ease-in-out;
+    }
+
+    /* Hero Section Base Styles */
+    .hero {
+      padding-top: 100px; /* Adjust for fixed navbar */
+      min-height: 100vh; /* Full viewport height */
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    /* Added Video Background CSS */
+    #bg-video {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        z-index: -2; /* Behind overlay and content */
+        transform: translateX(-50%) translateY(-50%);
+        background-size: cover;
+    }
+
+    /* Added Video Overlay CSS */
+    .video-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Dark semi-transparent overlay */
+        z-index: -1; /* Between video and content */
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      padding: 2rem;
+      background: rgba(0, 0, 0, 0.4); /* Dark overlay for text readability */
+      border-radius: 15px;
+    }
+
+    .hero-content h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .hero-content p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    /* Info Section Base Styles */
+    .info-section {
+      padding: 60px 20px;
+      background: #fff;
+    }
+
+    .info-section h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      color: #333;
+    }
+
+    .info-content, .info-content-right {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin: 2rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      max-width: 1200px;
+    }
+
+    .info-content-right {
+      flex-direction: row-reverse;
+    }
+
+    .info-image {
+      max-width: 400px;
+      border-radius: 10px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .info-text {
+      flex: 1;
+    }
+
+    .info-text h3 {
+      color: #ff69b4;
+      margin-bottom: 1rem;
+      font-size: 1.8rem;
+    }
+
+    .info-text h4 {
+      font-size: 1.1rem;
+      margin-top: 0.5rem;
+      color: #555;
+    }
+
+    .info-text p {
+      color: #666;
+      margin-bottom: 1rem;
+    }
+
+    .info-text ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .info-text li {
+      margin: 1rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .info-text li:before {
+      content: "\f00c"; /* FontAwesome check icon */
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      color: #ff69b4;
+      position: absolute;
+      left: 0;
+      font-size: 1rem;
+    }
+
+    /* Button Styles */
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 1.8rem;
+      background: linear-gradient(45deg, #ff69b4, #c77dff);
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+      font-weight: 600;
+      border: none;
+      box-shadow: 0 4px 10px rgba(255, 105, 180, 0.4);
+    }
+
+    .btn:hover {
+      background: linear-gradient(45deg, #c77dff, #ff69b4);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(199, 125, 255, 0.5);
+    }
+
+    /* Footer Base Styles */
+    footer {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    /* Responsive design adjustments */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none; /* Hide links by default */
+        flex-direction: column;
+        position: absolute;
+        top: 70px; /* Below navbar */
+        left: 0;
+        background: white;
+        width: 100%;
+        padding: 1rem 0;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      }
+
+      .nav-links.active {
+        display: flex; /* Show when active */
+      }
+
+      .nav-links li {
+        text-align: center;
+        margin: 10px 0;
+      }
+
+      .hamburger {
+        display: block;
+      }
+
+      .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+
+      .hamburger.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+      }
+
+      .info-content, .info-content-right {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .info-image {
+        max-width: 80%;
+        margin-bottom: 1rem;
+      }
+
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero-content p {
+        font-size: 1rem;
+      }
+    }
+
+    /* Utility Class for Margins */
+    .section-padding {
+      padding: 80px 20px;
+    }
+
+    /* Chat Widget Styles (Additions) */
+    .predefined-questions-area {
+      padding: 10px;
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+      margin-bottom: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .predefined-question-btn {
+      background-color: #f1f1f1;
+      border: 1px solid #ddd;
+      border-radius: 15px;
+      padding: 5px 12px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .predefined-question-btn:hover {
+      background-color: #e0e0e0;
+    }
+  </style>
+</head>
+<body>
+  <!-- REMOVED Vanta.js Background Container -->
+  <!-- <div id="vanta-bg"></div> -->
+
+  <!-- Added Video Background -->
+  <video autoplay muted playsinline id="bg-video">
+      <!-- Source will be set by JavaScript -->
+      Your browser does not support HTML5 video.
+  </video>
+  <div class="video-overlay"></div> <!-- Overlay Div -->
+
+  <header>
+    <nav class="navbar">
+      <div class="logo">VIT Hope Ribbon</div>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#home" class="active hvr-underline-from-center">Home</a></li>
+        <li><a href="about.html" class="hvr-underline-from-center">About</a></li>
+        <li><a href="features.html" class="hvr-underline-from-center">Features</a></li>
+        <li><a href="medical.html" class="hvr-underline-from-center">Medical Help</a></li>
+        <li><a href="community.html" class="hvr-underline-from-center">Community</a></li>
+        <li><a href="DONATION.html" class="hvr-underline-from-center">Donation</a></li>
+        <li><a href="contact.html" class="hvr-underline-from-center">Contact</a></li>
+        <li><a href="login.html" class="hvr-underline-from-center">Login/Register</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1 class="animate__animated animate__fadeInDown">Hope. Strength. Support.</h1>
+      <p class="animate__animated animate__fadeInUp animate__delay-1s">Join our community dedicated to breast cancer awareness, early detection, and mutual support. Together, we are stronger.</p>
+      <a href="#about" class="btn hvr-pulse-grow animate__animated animate__fadeInUp animate__delay-2s">Learn More</a>
+    </div>
+  </section>
+
+  <!-- Existing About Section (with AOS) -->
+  <section id="about" class="info-section section-padding">
+    <h2 data-aos="fade-down">Understanding Breast Cancer</h2>
+
+    <div class="info-content" data-aos="fade-right">
+        <img src="images/breast_cancer_social_card_1.png.webp" alt="What is Breast Cancer" class="info-image hvr-grow">
+        <div class="info-text">
+            <h3>What is Breast Cancer?</h3>
+            <p>Breast cancer is a disease where abnormal cells in the breast grow uncontrollably, forming a lump or tumor. It affects millions worldwide, primarily women, but men can also be diagnosed. Early detection through regular screenings and awareness of symptoms drastically improves treatment outcomes and survival rates.</p>
+            <a href="about.html" class="btn hvr-forward">Read Deep Dive</a>
+        </div>
+    </div>
+
+    <div class="info-content-right" data-aos="fade-left">
+        <img src="images/breast_cancer_social_card_2.png.webp" alt="Types of Breast Cancer" class="info-image hvr-grow">
+        <div class="info-text">
+            <h3>Types of Breast Cancer</h3>
+            <p>Understanding the type is crucial for effective treatment. Common types include:</p>
+            <ul>
+                <li><h4>Ductal Carcinoma In Situ (DCIS):</h4> Non-invasive, confined to milk ducts.</li>
+                <li><h4>Invasive Ductal Carcinoma (IDC):</h4> Most common, spreads beyond ducts.</li>
+                <li><h4>Invasive Lobular Carcinoma (ILC):</h4> Starts in lobules, can spread.</li>
+                <li><h4>Triple-Negative:</h4> Lacks common receptors, often aggressive.</li>
+                <li><h4>Inflammatory:</h4> Rare, aggressive, causes skin changes.</li>
+            </ul>
+            <a href="medical.html" class="btn hvr-forward">Explore Types</a>
+        </div>
+    </div>
+
+    <div class="info-content" data-aos="fade-right">
+        <img src="images/breast_cancer_social_card_5.png.webp" alt="Risk Factors" class="info-image hvr-grow">
+        <div class="info-text">
+            <h3>Causes and Risk Factors</h3>
+            <p>While the exact cause isn't always clear, key risk factors include:</p>
+            <ul>
+                <li>Genetics (e.g., BRCA mutations, family history)</li>
+                <li>Age (risk increases over 50)</li>
+                <li>Hormonal factors (early menstruation, late menopause)</li>
+                <li>Lifestyle (diet, exercise, alcohol)</li>
+                <li>Radiation exposure</li>
+            </ul>
+            <a href="features.html" class="btn hvr-forward">Assess Your Risk</a>
+        </div>
+    </div>
+
+    <div class="info-content-right" data-aos="fade-left">
+        <img src="images/Pink-october.jpeg.webp" alt="Symptoms" class="info-image hvr-grow">
+        <div class="info-text">
+            <h3>Symptoms to Watch For</h3>
+            <p>Early detection saves lives. Be aware of changes like:</p>
+            <ul>
+                <li>New lump or thickening in breast or underarm</li>
+                <li>Change in breast size, shape, or appearance</li>
+                <li>Nipple discharge (other than milk), inversion, or pain</li>
+                <li>Skin changes (dimpling, redness, peeling, swelling)</li>
+                <li>Persistent breast pain</li>
+            </ul>
+            <a href="new.html" class="btn hvr-forward">Symptom Checker Guide</a>
+        </div>
+    </div>
+  </section>
+
+  <!-- New Statistics Section -->
+  <section id="stats" class="section-padding" style="background: linear-gradient(135deg, #fde4f2, #e1d4fa);">
+    <h2 data-aos="fade-down">Impact by the Numbers</h2>
+    <div class="stats-container" data-aos="fade-up">
+      <div class="stat-item hvr-grow">
+        <i class="fas fa-users"></i>
+        <span class="stat-number" data-target="2300000">0</span>
+        <p>New Cases Annually Worldwide</p>
+      </div>
+      <div class="stat-item hvr-grow">
+        <i class="fas fa-ribbon"></i>
+        <span class="stat-number" data-target="90">0</span>%
+        <p>5-Year Survival Rate (Early Stage)</p>
+      </div>
+      <div class="stat-item hvr-grow">
+        <i class="fas fa-hand-holding-heart"></i>
+        <span class="stat-number" data-target="100000">0</span>+
+        <p>Community Members Supported</p>
+      </div>
+      <div class="stat-item hvr-grow">
+        <i class="fas fa-dollar-sign"></i>
+        <span class="stat-number" data-target="500000">0</span>+
+        <p>Raised for Research & Support</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- New Features Section -->
+  <section id="features" class="section-padding">
+      <h2 data-aos="fade-down">Our Platform Features</h2>
+      <div class="features-grid" data-aos="fade-up">
+          <div class="feature-card hvr-float-shadow">
+              <i class="fas fa-info-circle"></i>
+              <h3>About Us</h3>
+              <p>Learn about our mission, vision, and commitment to breast cancer awareness and support.</p>
+              <a href="about.html" class="feature-link">Learn More</a>
+          </div>
+          <div class="feature-card hvr-float-shadow">
+              <i class="fas fa-comments"></i>
+              <h3>Support Forums</h3>
+              <p>Connect with others, share experiences, and find emotional support in our safe community forums.</p>
+              <a href="community.html" class="feature-link">Join Discussion</a>
+          </div>
+          <div class="feature-card hvr-float-shadow">
+              <i class="fas fa-book-medical"></i>
+              <h3>Resource Library</h3>
+              <p>Access reliable information, articles, and guides about diagnosis, treatment, and survivorship.</p>
+              <a href="resources.html" class="feature-link">Explore Resources</a>
+          </div>
+          <div class="feature-card hvr-float-shadow">
+              <i class="fas fa-calendar-check"></i>
+              <h3>Appointment Helper</h3>
+              <p>Keep track of appointments, medications, and symptoms with our easy-to-use tools.</p>
+              <a href="medical.html" class="feature-link">Use Tools</a>
+          </div>
+          <div class="feature-card hvr-float-shadow">
+              <i class="fas fa-map-marked-alt"></i>
+              <h3>Find Specialists</h3>
+              <p>Locate nearby hospitals, doctors, and support centers using our interactive map.</p>
+              <a href="map.html" class="feature-link">Find Care</a>
+          </div>
+          <div class="feature-card hvr-float-shadow">
+              <i class="fas fa-pills"></i>
+              <h3>Medicine Guide</h3>
+              <p>Find comprehensive information about medications, their side effects, and affordable alternatives.</p>
+              <a href="medicine.html" class="feature-link">View Medicines</a>
+          </div>
+      </div>
+  </section>
+
+  <!-- New Community Highlight Section -->
+  <section id="community" class="section-padding" style="background-color: #fff;">
+      <h2 data-aos="fade-down">Voices from Our Community</h2>
+      <div class="testimonials-container" data-aos="fade-up">
+          <div class="testimonial-card hvr-grow">
+              <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="User Testimonial" class="testimonial-img">
+              <p>"Finding this community was a turning point in my journey. The support and shared stories gave me strength I didn't know I had."</p>
+              <h4>- Sarah J.</h4>
+          </div>
+          <div class="testimonial-card hvr-grow">
+              <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="User Testimonial" class="testimonial-img">
+              <p>"The resources here are invaluable. I felt so lost after my diagnosis, but the guides helped me understand my options."</p>
+              <h4>- Maria R.</h4>
+          </div>
+          <div class="testimonial-card hvr-grow">
+              <img src="https://randomuser.me/api/portraits/men/43.jpg" alt="User Testimonial" class="testimonial-img">
+              <p>"As a partner, finding support was hard. This platform provided a space for caregivers too. Highly recommend."</p>
+              <h4>- David K.</h4>
+          </div>
+      </div>
+      <div style="text-align: center; margin-top: 30px;" data-aos="fade-up">
+        <a href="community.html" class="btn hvr-pulse-grow">Join Our Community</a>
+      </div>
+  </section>
+
+  <!-- New Call to Action Section -->
+  <section id="cta" class="section-padding" style="background: url('images/cta-background.jpg') no-repeat center center/cover; color: white; text-align: center;">
+    <div class="cta-overlay" style="background: rgba(0, 0, 0, 0.6); padding: 60px 20px; border-radius: 10px;">
+        <h2 data-aos="zoom-in" style="color: white;">Take Action Today</h2>
+        <p data-aos="zoom-in" data-aos-delay="200" style="font-size: 1.1rem; margin-bottom: 30px;">Whether you need support, want to help, or wish to raise awareness, you can make a difference.</p>
+        <div class="cta-buttons" data-aos="fade-up" data-aos-delay="400">
+            <a href="DONATION.html" class="btn hvr-icon-forward">Donate Now <i class="fas fa-arrow-right hvr-icon"></i></a>
+            <a href="DONATION.html#campaign" class="btn hvr-icon-forward" style="margin-left: 15px; background: #fff; color: #ff69b4; border: 1px solid #ff69b4;">Start a Campaign <i class="fas fa-arrow-right hvr-icon"></i></a>
+        </div>
+    </div>
+  </section>
+
+  <!-- Live Chat Button -->
+  <button id="chat-toggle" class="chat-toggle hvr-buzz-out">
+    <i class="fas fa-comments"></i>
+  </button>
+
+  <!-- Chat Container -->
+  <div id="chat-container" class="chat-container">
+    <div class="chat-header">
+      <h3>Chat Support</h3>
+      <button id="close-chat" class="close-chat">&times;</button>
+    </div>
+    <div id="message-display" class="message-display">
+      <!-- Messages will appear here -->
+    </div>
+    <div class="input-area">
+      <textarea id="message-input" placeholder="Ask about breast cancer..."></textarea>
+      <button id="send-btn" class="send-btn"><i class="fas fa-paper-plane"></i></button>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2024 Breast Cancer Awareness & Support. All Rights Reserved.</p>
+    <!-- Add social media links or other footer content here -->
+  </footer>
+
+  <!-- Added AOS Initialization -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+  <script src="js/chat.js"></script>
+  <script src="js/main.js"></script> <!-- New main JS file -->
+
+  <!-- Initialize AOS -->
+  <script>
+    AOS.init({
+        duration: 1000, // values from 0 to 3000, with step 50ms
+        once: true, // whether animation should happen only once - while scrolling down
+    });
+
+    // --- Sequential Video Background Logic ---
+    const videoPlayer = document.getElementById('bg-video');
+    // IMPORTANT: Assumes videos are in a 'vid' folder and named video1.mp4, video2.mp4, video3.mp4
+    const videoSources = [
+        'vid/video1.mp4',
+        'vid/video2.mp4',
+        'vid/video3.mp4'
+    ];
+    let currentVideoIndex = 0;
+
+    function playNextVideo() {
+        currentVideoIndex = (currentVideoIndex + 1) % videoSources.length;
+        videoPlayer.src = videoSources[currentVideoIndex];
+        videoPlayer.load();
+        videoPlayer.play().catch(error => {
+            console.error("Video autoplay failed:", error);
+        });
+    }
+
+    videoPlayer.addEventListener('ended', playNextVideo);
+
+    if (videoSources.length > 0) {
+        videoPlayer.src = videoSources[currentVideoIndex];
+        videoPlayer.play().catch(error => {
+            console.error("Initial video autoplay failed:", error);
+        });
+    }
+
+    // --- Chat Toggle Logic ---
+    const chatToggle = document.getElementById('chat-toggle');
+  </script>
+</body>
+</html>
